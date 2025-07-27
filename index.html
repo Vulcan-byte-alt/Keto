@@ -3356,18 +3356,19 @@
 
         // Video loading handler
         document.addEventListener('DOMContentLoaded', function () {
-            const video = document.querySelector('.video-background');
-            if (video) {
-                video.addEventListener('loadeddata', function () {
-                    video.classList.add('loaded');
-                });
+                const video = document.querySelector('.video-background');
+                if (video) {
+                    // Preload video
+                    video.addEventListener('canplay', function () {
+                        video.classList.add('loaded');
+                    });
 
-                // Fallback if video fails to load
-                video.addEventListener('error', function () {
-                    video.style.display = 'none';
-                });
-            }
-        });
+                    // Handle video load error - keep showing background image
+                    video.addEventListener('error', function () {
+                        video.style.display = 'none';
+                    });
+                }
+            });
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function () {
