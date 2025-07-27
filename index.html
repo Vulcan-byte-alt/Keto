@@ -989,33 +989,35 @@
 
             /* Section Headers Mobile */
             /* Mobile Menu Styles */
-            #mobile-menu {
-                backdrop-filter: blur(20px);
-            }
+/* Mobile Menu Styles - Fixed */
+#mobile-menu {
+    backdrop-filter: blur(20px);
+    padding-top: 100px; /* Add top padding to account for navbar */
+}
 
-            .mobile-nav-link {
-                position: relative;
-                transition: all 0.3s ease;
-            }
+.mobile-nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
 
-            .mobile-nav-link:hover {
-                transform: translateX(10px);
-            }
+.mobile-nav-link:hover {
+    transform: translateX(10px);
+}
 
-            .mobile-nav-link::before {
-                content: '';
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background: linear-gradient(90deg, #ff9a9e, #f9d71c);
-                transition: width 0.3s ease;
-            }
+.mobile-nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff9a9e, #f9d71c);
+    transition: width 0.3s ease;
+}
 
-            .mobile-nav-link:hover::before {
-                width: 100%;
-            }
+.mobile-nav-link:hover::before {
+    width: 100%;
+}
 
             .mobile-section-header {
                 font-size: 2.5rem;
@@ -1227,49 +1229,50 @@
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu"
-            class="fixed inset-0 bg-black bg-opacity-95 backdrop-blur-lg z-[60] opacity-0 invisible transition-all duration-300 md:hidden">
-            <a href="#home"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="home">HOME</a>
-            <a href="#ingredients"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="ingredients">INGREDIENTS</a>
-            <a href="#process"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="process">PROCESS</a>
-            <a href="#collection"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="collection">COLLECTION</a>
-            <a href="#blog"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="blog">BLOG</a>
-            <a href="#drops"
-                class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
-                onclick="closeMobileMenu()" data-section="drops">DROPS</a>
+            class="fixed inset-0 bg-black bg-opacity-95 backdrop-blur-lg z-40 opacity-0 invisible transition-all duration-300 md:hidden">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-center">
+                <a href="#home"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="home">HOME</a>
+                <a href="#ingredients"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="ingredients">INGREDIENTS</a>
+                <a href="#process"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="process">PROCESS</a>
+                <a href="#collection"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="collection">COLLECTION</a>
+                <a href="#blog"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="blog">BLOG</a>
+                <a href="#drops"
+                    class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
+                    onclick="closeMobileMenu()" data-section="drops">DROPS</a>
 
-            <!-- Mobile Cart & CTA -->
-            <div class="flex flex-col space-y-4 mt-8">
-                <button onclick="toggleCart(); closeMobileMenu();"
-                    class="flex items-center justify-center space-x-2 text-white hover:text-pink-400 transition-colors">
+                <!-- Mobile Cart & CTA -->
+                <div class="flex flex-col space-y-4 mt-8">
+                    <button onclick="toggleCart(); closeMobileMenu();"
+                        class="flex items-center justify-center space-x-2 text-white hover:text-pink-400 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6H19M7 13l-1.5 6m4.5-3h6"></path>
+                        </svg>
+                        <span>Cart (<span id="mobile-cart-count">0</span>)</span>
+                    </button>
+                    <button class="luxury-button text-black px-8 py-3 rounded-full font-semibold tracking-wide">JOIN
+                        NEXT DROP</button>
+                </div>
+
+                <!-- Close button -->
+                <button onclick="closeMobileMenu()"
+                    class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center text-white hover:text-pink-400 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6H19M7 13l-1.5 6m4.5-3h6"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
-                    <span>Cart (<span id="mobile-cart-count">0</span>)</span>
                 </button>
-                <button class="luxury-button text-black px-8 py-3 rounded-full font-semibold tracking-wide">JOIN
-                    NEXT DROP</button>
             </div>
-
-            <!-- Close button -->
-            <button onclick="closeMobileMenu()"
-                class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center text-white hover:text-pink-400 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                    </path>
-                </svg>
-            </button>
-        </div>
         </div>
 
         <!-- Navbar ambient glow -->
@@ -2913,46 +2916,46 @@
         }
 
         // Mobile Menu Functions
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            function toggleMobileMenu() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-            if (mobileMenu.classList.contains('opacity-0')) {
-                // Open mobile menu
-                mobileMenu.classList.remove('opacity-0', 'invisible');
-                document.body.style.overflow = 'hidden';
+                if (mobileMenu.classList.contains('opacity-0')) {
+                    // Open mobile menu
+                    mobileMenu.classList.remove('opacity-0', 'invisible');
+                    document.body.style.overflow = 'hidden';
 
-                // Animate hamburger
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.style.transform = 'rotate(90deg)';
+                    // Animate hamburger
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.style.transform = 'rotate(90deg)';
+                    }
+                } else {
+                    closeMobileMenu();
                 }
-            } else {
-                closeMobileMenu();
             }
-        }
 
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            function closeMobileMenu() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-            mobileMenu.classList.add('opacity-0', 'invisible');
-            document.body.style.overflow = 'auto';
+                mobileMenu.classList.add('opacity-0', 'invisible');
+                document.body.style.overflow = 'auto';
 
-            // Reset hamburger
-            if (mobileMenuBtn) {
-                mobileMenuBtn.style.transform = 'rotate(0deg)';
+                // Reset hamburger
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.style.transform = 'rotate(0deg)';
+                }
             }
-        }
 
-        // Close mobile menu when clicking on links
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add click handlers to mobile nav links
-            document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                link.addEventListener('click', function () {
-                    setTimeout(closeMobileMenu, 100);
+            // Close mobile menu when clicking on links
+            document.addEventListener('DOMContentLoaded', function () {
+                // Add click handlers to mobile nav links
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', function () {
+                        setTimeout(closeMobileMenu, 100);
+                    });
                 });
             });
-        });
 
         window.addEventListener('scroll', requestScrollUpdate);
 
@@ -2991,7 +2994,7 @@
             updateActiveNavLink();
         });
 
-
+       
 
         // Enhanced countdown timer with proper timing
         function setTargetDate() {
