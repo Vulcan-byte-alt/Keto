@@ -373,14 +373,20 @@
 
         /* Video Background Styles */
         .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.video-background.loaded {
+    opacity: 1;
+}
 
         .video-dark-inset {
             position: absolute;
@@ -391,12 +397,14 @@
             z-index: 3;
         }
 
-        .hero-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+       .hero-bg {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+        url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
         /* IMPROVED: Glass effects */
         .glass-effect {
@@ -989,15 +997,25 @@
 
             /* Section Headers Mobile */
             /* Mobile Menu Styles */
-/* Mobile Menu Styles - Fixed */
+/* Mobile Menu Styles - Fixed with proper scrolling */
 #mobile-menu {
     backdrop-filter: blur(20px);
-    padding-top: 100px; /* Add top padding to account for navbar */
+    overflow-y: auto; /* Allow scrolling */
+    padding-top: 400px; /* Space for navbar */
+    padding-bottom: 400px; /* Bottom spacing */
+    padding-left: 5px;
+
+}
+
+/* Change background to translucent */
+#mobile-menu {
+    background: rgba(0, 0, 0, 0.85) !important; /* More translucent */
 }
 
 .mobile-nav-link {
     position: relative;
     transition: all 0.3s ease;
+    padding: 12px 0; /* Add some padding for better touch targets */
 }
 
 .mobile-nav-link:hover {
@@ -1229,7 +1247,7 @@
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu"
-            class="fixed inset-0 bg-black bg-opacity-95 backdrop-blur-lg z-40 opacity-0 invisible transition-all duration-300 md:hidden">
+            class="fixed inset-0 backdrop-blur-lg z-[60] opacity-0 invisible transition-all duration-300 md:hidden">
             <div class="flex flex-col items-center justify-center h-full space-y-8 text-center">
                 <a href="#home"
                     class="mobile-nav-link text-2xl font-serif font-light text-white hover:text-pink-400 transition-colors"
@@ -1283,7 +1301,8 @@
     <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
 
         <!-- Video Background -->
-        <video class="video-background" autoplay loop muted playsinline>
+        <video class="video-background" autoplay loop muted playsinline
+            poster="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80">
 
             <source src="hero.mp4" type="video/mp4">
             <!-- Fallback image will be shown via CSS if video fails -->
@@ -1313,7 +1332,7 @@
                     <span class="gradient-text font-medium">Zero compromise. Pure bliss.</span>
                 </p>
 
-                <div class="hero-mobile-buttons md:flex-row md:gap-6 justify-center items-center">
+                <div class="flex flex-col gap-4 sm:flex-row sm:gap-6 justify-center items-center">
                     <button
                         class="luxury-button text-black px-8 md:px-12 py-3 md:py-4 rounded-full font-semibold text-sm md:text-lg tracking-wide">
                         DISCOVER COLLECTION
@@ -2916,36 +2935,37 @@
         }
 
         // Mobile Menu Functions
-            function toggleMobileMenu() {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    // Mobile Menu Functions - Without scroll lock
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-                if (mobileMenu.classList.contains('opacity-0')) {
-                    // Open mobile menu
-                    mobileMenu.classList.remove('opacity-0', 'invisible');
-                    document.body.style.overflow = 'hidden';
+        if (mobileMenu.classList.contains('opacity-0')) {
+            // Open mobile menu
+            mobileMenu.classList.remove('opacity-0', 'invisible');
+            // Remove this line: document.body.style.overflow = 'hidden';
 
-                    // Animate hamburger
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.style.transform = 'rotate(90deg)';
-                    }
-                } else {
-                    closeMobileMenu();
-                }
+            // Animate hamburger
+            if (mobileMenuBtn) {
+                mobileMenuBtn.style.transform = 'rotate(90deg)';
             }
+        } else {
+            closeMobileMenu();
+        }
+    }
 
-            function closeMobileMenu() {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-                mobileMenu.classList.add('opacity-0', 'invisible');
-                document.body.style.overflow = 'auto';
+        mobileMenu.classList.add('opacity-0', 'invisible');
+        // Remove this line: document.body.style.overflow = 'auto';
 
-                // Reset hamburger
-                if (mobileMenuBtn) {
-                    mobileMenuBtn.style.transform = 'rotate(0deg)';
-                }
-            }
+        // Reset hamburger
+        if (mobileMenuBtn) {
+            mobileMenuBtn.style.transform = 'rotate(0deg)';
+        }
+    }
 
             // Close mobile menu when clicking on links
             document.addEventListener('DOMContentLoaded', function () {
@@ -3302,6 +3322,21 @@
                 }, 300);
             }, 3000);
         }
+
+        // Video loading handler
+            document.addEventListener('DOMContentLoaded', function () {
+                const video = document.querySelector('.video-background');
+                if (video) {
+                    video.addEventListener('loadeddata', function () {
+                        video.classList.add('loaded');
+                    });
+
+                    // Fallback if video fails to load
+                    video.addEventListener('error', function () {
+                        video.style.display = 'none';
+                    });
+                }
+            });
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function () {
