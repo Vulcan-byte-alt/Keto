@@ -3472,6 +3472,95 @@
 `;
             document.head.appendChild(style);
     </script>
+    <script>
+        // Mobile Menu Scroll Lock & Countdown Fixes
+
+            // Add CSS fixes for mobile
+            const mobileFixesStyle = document.createElement('style');
+            mobileFixesStyle.textContent = `
+    /* Mobile countdown fix */
+    @media (max-width: 768px) {
+        .count-box {
+            padding: 0.5rem !important;
+            min-width: 0;
+        }
+        
+        .count-box div {
+            font-size: 1.25rem !important;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        
+        .count-box .text-xs {
+            font-size: 0.6rem !important;
+            white-space: nowrap;
+        }
+    }
+    
+    /* Scroll lock for mobile menu */
+    body.mobile-menu-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+`;
+            document.head.appendChild(mobileFixesStyle);
+
+            // Enhanced mobile menu functions with scroll lock
+            window.toggleMobileMenu = function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const body = document.body;
+
+                if (mobileMenu.classList.contains('opacity-0')) {
+                    // Open mobile menu
+                    mobileMenu.classList.remove('opacity-0', 'invisible');
+                    body.classList.add('mobile-menu-open'); // Lock scroll
+
+                    // Animate hamburger
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.style.transform = 'rotate(90deg)';
+                    }
+                } else {
+                    // Close mobile menu
+                    mobileMenu.classList.add('opacity-0', 'invisible');
+                    body.classList.remove('mobile-menu-open'); // Unlock scroll
+
+                    // Reset hamburger
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.style.transform = 'rotate(0deg)';
+                    }
+                }
+            };
+
+            window.closeMobileMenu = function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const body = document.body;
+
+                mobileMenu.classList.add('opacity-0', 'invisible');
+                body.classList.remove('mobile-menu-open'); // Unlock scroll
+
+                // Reset hamburger
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.style.transform = 'rotate(0deg)';
+                }
+            };
+
+            // Make sure mobile nav links close the menu and unlock scroll
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', function () {
+                        setTimeout(() => {
+                            closeMobileMenu();
+                        }, 100);
+                    });
+                });
+            });
+
+            console.log('🔒 Mobile menu scroll lock and countdown fixes applied!');
+    </script>
     
 </body>
 
