@@ -373,38 +373,59 @@
 
         /* Video Background Styles */
         .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .video-background.loaded {
+            opacity: 1;
+        }
+
+        /* Image overlay - lighter */
+.image-dark-inset {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
+    inset: 0;
+    background: 
+        radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 85%);
+    z-index: 3;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Video overlay - darker */
+.video-dark-inset {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 80%),
+        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 3;
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
-.video-background.loaded {
+.video-background.loaded ~ .video-dark-inset {
     opacity: 1;
 }
 
-        .video-dark-inset {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.6) 100%);
-            z-index: 3;
-        }
-
-       .hero-bg {
-    background: 
-        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), 
-        url('heavenly bliss.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+.video-background.loaded ~ .image-dark-inset {
+    opacity: 0;
 }
+
+        .hero-bg {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+                url('hero.avif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
         /* IMPROVED: Glass effects */
         .glass-effect {
@@ -997,45 +1018,50 @@
 
             /* Section Headers Mobile */
             /* Mobile Menu Styles */
-/* Mobile Menu Styles - Fixed with proper scrolling */
-#mobile-menu {
-    backdrop-filter: blur(20px);
-    overflow-y: auto; /* Allow scrolling */
-    padding-top: 400px; /* Space for navbar */
-    padding-bottom: 400px; /* Bottom spacing */
-    padding-left: 5px;
+            /* Mobile Menu Styles - Fixed with proper scrolling */
+            #mobile-menu {
+                backdrop-filter: blur(20px);
+                overflow-y: auto;
+                /* Allow scrolling */
+                padding-top: 400px;
+                /* Space for navbar */
+                padding-bottom: 400px;
+                /* Bottom spacing */
+                padding-left: 5px;
 
-}
+            }
 
-/* Change background to translucent */
-#mobile-menu {
-    background: rgba(0, 0, 0, 0.85) !important; /* More translucent */
-}
+            /* Change background to translucent */
+            #mobile-menu {
+                background: rgba(0, 0, 0, 0.85) !important;
+                /* More translucent */
+            }
 
-.mobile-nav-link {
-    position: relative;
-    transition: all 0.3s ease;
-    padding: 12px 0; /* Add some padding for better touch targets */
-}
+            .mobile-nav-link {
+                position: relative;
+                transition: all 0.3s ease;
+                padding: 12px 0;
+                /* Add some padding for better touch targets */
+            }
 
-.mobile-nav-link:hover {
-    transform: translateX(10px);
-}
+            .mobile-nav-link:hover {
+                transform: translateX(10px);
+            }
 
-.mobile-nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #ff9a9e, #f9d71c);
-    transition: width 0.3s ease;
-}
+            .mobile-nav-link::before {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(90deg, #ff9a9e, #f9d71c);
+                transition: width 0.3s ease;
+            }
 
-.mobile-nav-link:hover::before {
-    width: 100%;
-}
+            .mobile-nav-link:hover::before {
+                width: 100%;
+            }
 
             .mobile-section-header {
                 font-size: 2.5rem;
@@ -1308,6 +1334,7 @@
             <!-- Fallback image will be shown via CSS if video fails -->
         </video>
         <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 z-2"></div>
+        <div class="image-dark-inset"></div>
         <div class="video-dark-inset"></div>
         <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 z-2"></div>
 
@@ -2935,47 +2962,47 @@
         }
 
         // Mobile Menu Functions
-    // Mobile Menu Functions - Without scroll lock
-    function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        // Mobile Menu Functions - Without scroll lock
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-        if (mobileMenu.classList.contains('opacity-0')) {
-            // Open mobile menu
-            mobileMenu.classList.remove('opacity-0', 'invisible');
-            // Remove this line: document.body.style.overflow = 'hidden';
+            if (mobileMenu.classList.contains('opacity-0')) {
+                // Open mobile menu
+                mobileMenu.classList.remove('opacity-0', 'invisible');
+                // Remove this line: document.body.style.overflow = 'hidden';
 
-            // Animate hamburger
-            if (mobileMenuBtn) {
-                mobileMenuBtn.style.transform = 'rotate(90deg)';
+                // Animate hamburger
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.style.transform = 'rotate(90deg)';
+                }
+            } else {
+                closeMobileMenu();
             }
-        } else {
-            closeMobileMenu();
         }
-    }
 
-    function closeMobileMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-        mobileMenu.classList.add('opacity-0', 'invisible');
-        // Remove this line: document.body.style.overflow = 'auto';
+            mobileMenu.classList.add('opacity-0', 'invisible');
+            // Remove this line: document.body.style.overflow = 'auto';
 
-        // Reset hamburger
-        if (mobileMenuBtn) {
-            mobileMenuBtn.style.transform = 'rotate(0deg)';
+            // Reset hamburger
+            if (mobileMenuBtn) {
+                mobileMenuBtn.style.transform = 'rotate(0deg)';
+            }
         }
-    }
 
-            // Close mobile menu when clicking on links
-            document.addEventListener('DOMContentLoaded', function () {
-                // Add click handlers to mobile nav links
-                document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.addEventListener('click', function () {
-                        setTimeout(closeMobileMenu, 100);
-                    });
+        // Close mobile menu when clicking on links
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add click handlers to mobile nav links
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', function () {
+                    setTimeout(closeMobileMenu, 100);
                 });
             });
+        });
 
         window.addEventListener('scroll', requestScrollUpdate);
 
@@ -3014,7 +3041,7 @@
             updateActiveNavLink();
         });
 
-       
+
 
         // Enhanced countdown timer with proper timing
         function setTargetDate() {
@@ -3324,19 +3351,19 @@
         }
 
         // Video loading handler
-            document.addEventListener('DOMContentLoaded', function () {
-                const video = document.querySelector('.video-background');
-                if (video) {
-                    video.addEventListener('loadeddata', function () {
-                        video.classList.add('loaded');
-                    });
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.querySelector('.video-background');
+            if (video) {
+                video.addEventListener('loadeddata', function () {
+                    video.classList.add('loaded');
+                });
 
-                    // Fallback if video fails to load
-                    video.addEventListener('error', function () {
-                        video.style.display = 'none';
-                    });
-                }
-            });
+                // Fallback if video fails to load
+                video.addEventListener('error', function () {
+                    video.style.display = 'none';
+                });
+            }
+        });
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function () {
