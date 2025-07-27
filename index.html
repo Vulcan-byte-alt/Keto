@@ -389,34 +389,34 @@
         }
 
         /* Image overlay - lighter */
-.image-dark-inset {
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 85%);
-    z-index: 3;
-    transition: opacity 1s ease-in-out;
-}
+        .image-dark-inset {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.2) 85%);
+            z-index: 3;
+            transition: opacity 1s ease-in-out;
+        }
 
-/* Video overlay - darker */
-.video-dark-inset {
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 80%),
-        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%);
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
+        /* Video overlay - darker */
+        .video-dark-inset {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 80%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
 
-.video-background.loaded ~ .video-dark-inset {
-    opacity: 1;
-}
+        .video-background.loaded~.video-dark-inset {
+            opacity: 1;
+        }
 
-.video-background.loaded ~ .image-dark-inset {
-    opacity: 0;
-}
+        .video-background.loaded~.image-dark-inset {
+            opacity: 0;
+        }
 
         .hero-bg {
             background:
@@ -1198,7 +1198,7 @@
                         <div
                             class="w-full h-full bg-gradient-to-br from-pink-400 via-rose-400 to-amber-400 rounded-full flex items-center justify-center shadow-luxury-pink transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative z-10">
                             <span
-                                class="text-black font-serif font-bold text-lg md:text-2xl group-hover:scale-110 transition-transform">S</span>
+                                class="text-black font-serif font-bold text-lg md:text-2xl group-hover:scale-110 transition-transform">K</span>
                         </div>
                         <!-- Floating particles around logo -->
                         <div
@@ -1210,14 +1210,14 @@
                     </div>
                     <div>
                         <span
-                            class="text-lg md:text-2xl font-serif font-light bg-gradient-to-r from-white via-pink-200 to-amber-200 bg-clip-text text-transparent brand-text-primary">Sweet</span>
+                            class="text-lg md:text-2xl font-serif font-light bg-gradient-to-r from-white via-pink-200 to-amber-200 bg-clip-text text-transparent brand-text-primary">Keto</span>
                         <span
-                            class="text-lg md:text-2xl font-serif font-bold text-white ml-1 drop-shadow-lg brand-text-secondary">Indulgence</span>
+                            class="text-lg md:text-2xl font-serif font-bold text-white ml-1 drop-shadow-lg brand-text-secondary">Cookie</span>
                     </div>
                 </div>
 
                 <!-- Enhanced Desktop Navigation with Cookie Theme -->
-                <div class="hidden md:flex items-center desktop-nav">
+                <div class="hidden md:flex items-center justify-center flex-1 desktop-nav">
                     <a href="#home" class="nav-link-enhanced group active" data-section="home">
                         <div class="nav-cookie-bg"></div>
                         <span class="nav-text">HOME</span>
@@ -1243,6 +1243,10 @@
                         <span class="nav-text">BLOG</span>
                     </a>
 
+
+                </div>
+
+                <div class="hidden md:flex items-center">
                     <!-- Enhanced Cart Icon -->
                     <button onclick="toggleCart()" class="cart-button-enhanced group relative">
                         <div class="cart-icon-wrapper">
@@ -1254,13 +1258,13 @@
                         </div>
                         <span id="cart-count" class="cart-badge">0</span>
                     </button>
-
-                    <!-- Enhanced CTA Button -->
-                    <button class="cta-button-enhanced group">
-                        <span class="cta-text">JOIN NEXT DROP</span>
-                        <div class="cta-shine"></div>
-                    </button>
                 </div>
+
+                <!-- Enhanced CTA Button -->
+                <button class="cta-button-enhanced group">
+                    <span class="cta-text">JOIN NEXT DROP</span>
+                    <div class="cta-shine"></div>
+                </button>
 
                 <!-- Enhanced Mobile Menu Button -->
                 <button class="md:hidden mobile-menu-enhanced" id="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -2859,7 +2863,7 @@
 
             <div class="elegant-divider elegant-divider-dark mx-auto mb-4 md:mb-6"></div>
             <div class="text-center mobile-footer-text md:text-base text-gray-400 font-light">
-                <p>© 2024 Sweet Indulgence. All rights reserved. Crafted with love and precision.</p>
+                <p>© 2025 Keto Cookie. All rights reserved. Crafted with love and precision.</p>
             </div>
         </div>
     </footer>
